@@ -1,5 +1,6 @@
 // Assignment Code
 // # = id, . = class
+//setting up variable named generateBtn, grabs first "generate" id from the document.
 var generateBtn = document.querySelector("#generate");
 // setting up variables with array values
 // array of data-type numbers
@@ -15,31 +16,34 @@ var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  //go and retrieve html element with id of password
   var passwordText = document.querySelector("#password");
-
+//change the text that is inside passwordText to password variable
   passwordText.value = password;
 
 }
 // 1. we need a function named generatePassword();
 function generatePassword() {
-  // store user's length as a number
+  // store user's length as a number, collects from prompt as whole integer "parseInt"
   var length = parseInt(prompt("How many characters? Choose a number between 8 and 128?"));
   // the length has to be > 8 and <128
     // if it's not, we need to start over
       // otherwise, continue with the other prompts
+      //if password length less than 8, more than 128 or Not A Number(NaN)
   if (length<8 || length>128 || isNaN(length) === true) {
-    // then do this if password if number not between 8 or 128.
+    // then do this if password  length not between 8 or 128.
     alert("Password must be a number between 8 and 128");
     return;
     //return to page if not between 8 or 128.
   }
-  // store user's responses as variables
+  // store user's responses as variables using a confirmation box
   var hasNumbers = confirm("Would you like to include numbers?");
   var hasspecialCharacter = confirm("Would you like special characters?");
   var hasupperCase = confirm("Would you like uppercase characters?");
   var haslowerCase = confirm("Would you like lowercase?");
 
   // check to make sure user selected at least one character type
+  // if no characters are selected then alert follows and returns
   if (hasNumbers === false &&
     hasspecialCharacter === false &&
     hasupperCase === false &&
@@ -48,24 +52,27 @@ function generatePassword() {
       return;
     }
 
-  // variable to store all the possible choices, based on the user's input
+  //  creates variable to store all the possible choices, based on the user's input
   var possibleChars = [];
   // variable to store the final password as an array
   var result = [];
   // variable to store guaranteed characters, initialized as empty array
 
+// if they asked for numbers the possiblecharacters will include numbers
   if (hasNumbers===true){
     // Array.prototype.concat() => merging / adding two arrays together
     // possible characters equals itself + numbers
     possibleChars = possibleChars.concat(numbers);
   }
-
+//if they asked for special characters, the possiblecharcters will include specialcharacters
   if (hasspecialCharacter === true) {
     possibleChars = possibleChars.concat(specialCharacters);
   }
+  //if they asked for upper case, the possible charcters will include upper case letters
   if (hasupperCase === true) {
     possibleChars = possibleChars.concat(upperCase);
   }
+  //if they asked for lower case, the possible characters will include lower case letters
   if(haslowerCase === true) {
     possibleChars = possibleChars.concat(lowerCase);
   }
