@@ -1,9 +1,7 @@
-// Assignment Code
-// # = id, . = class
-//setting up variable named generateBtn, grabs "generate" id from the document.
+//Initialize global variables
+//setting up variable for the generate button in the document.
 var generateBtn = document.querySelector("#generate");
-// setting up variables with array values
-// Initialize global variables
+// setting up variables with array values(uppercase, lowercase)
 // array of data-type numbers
 // uppercase, lowercase, numbers, characters
 var numbers = [0,1,2,3,4,5,6,7,8,9];
