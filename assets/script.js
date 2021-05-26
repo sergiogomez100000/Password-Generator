@@ -23,22 +23,22 @@ function writePassword() {
 // 1. we need a function named generatePassword();
 function generatePassword() {
   // store user's length as a number, collects from prompt as whole integer "parseInt"
-  var length = parseInt(prompt("How many characters? Choose a number between 8 and 128?"));
+  var length = parseInt(prompt("How many characters would you like the password to be(between 8 and 128)?"));
   // the length has to be > 8 and <128
     // if it's not, we need to start over
       // otherwise, continue with the other prompts
       //if password length less than 8, more than 128 or Not A Number(NaN)
   if (length<8 || length>128 || isNaN(length) === true) {
     // then do this if password  length not between 8 or 128.
-    alert("Password must be a number between 8 and 128");
+    alert("Password must be a number between 8 and 128!");
     return;
     //return to page if not between 8 or 128.
   }
   // store user's responses as variables using a confirmation box
   var hasNumbers = confirm("Would you like to include numbers?");
-  var hasspecialCharacter = confirm("Would you like special characters?");
-  var hasupperCase = confirm("Would you like uppercase characters?");
-  var haslowerCase = confirm("Would you like lowercase?");
+  var hasspecialCharacter = confirm("Would you like to include special characters?");
+  var hasupperCase = confirm("Would you like to include uppercase characters?");
+  var haslowerCase = confirm("Would you like to include lowercase characters?");
 
   // check to make sure user selected at least one character type
   // if no characters are selected then alert follows and returns
