@@ -1,11 +1,9 @@
 //Initialize global variables
 //setting up variable for the generate button in the document.
 var generateBtn = document.querySelector("#generate");
-// setting up variables with array values(uppercase, lowercase)
-// array of data-type numbers
-// uppercase, lowercase, numbers, characters
+// setting up data-type variables with arrays of data-types(uppercase, lowercase, numbers, special characters)
 var numbers = [0,1,2,3,4,5,6,7,8,9];
-// array of data-type strings because in parenthesis split with commas
+// array of the data-type strings needs quotation marks split with commas
 var specialCharacters = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+"];
 var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
@@ -20,23 +18,23 @@ function writePassword() {
 }
 // 1. we need a function named generatePassword();
 function generatePassword() {
-  // store user's length as a number, collects from prompt as whole integer "parseInt"
-  var length = parseInt(prompt("How many characters would you like the password to be(between 8 and 128)?"));
+  //stores password length from length Id as variable
+  var length = document.getElementById("length").value;
   // the length has to be > 8 and <128
     // if it's not, we need to start over
       // otherwise, continue with the other prompts
       //if password length less than 8, more than 128 or Not A Number(NaN)
   if (length<8 || length>128 || isNaN(length) === true) {
     // then do this if password  length not between 8 or 128.
-    alert("Password must be a number between 8 and 128!");
+    alert("Password length must be between 8 and 128!");
     return;
     //return to page if not between 8 or 128.
   }
   // store user's responses as variables using a confirmation box
-  var hasNumbers = confirm("Would you like to include numbers?");
-  var hasspecialCharacter = confirm("Would you like to include special characters?");
-  var hasupperCase = confirm("Would you like to include uppercase characters?");
-  var haslowerCase = confirm("Would you like to include lowercase characters?");
+  var hasNumbers = document.getElementById("num").checked;
+  var hasspecialCharacter = document.getElementById("special").checked;
+  var hasupperCase = document.getElementById("upper").checked;
+  var haslowerCase = document.getElementById("lower").checked;
 
   // check to make sure user selected at least one character type
   // if no characters are selected then alert follows and returns
