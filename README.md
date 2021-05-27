@@ -10,7 +10,7 @@ Hello I've made a password generator for users to generate secured passwords upo
 Users can use my application to create password safely. they generate a more secure password by using between 8-128 characters and utilizing special characters, numbers, upper and lower case letters as well. the password will always be randomized.
 
 # Links
-You can use these links to go to my Application(https://github.com/sergiogomez100000) and my Github Repository(https://github.com/sergiogomez100000/Password-Generator).
+You can use these links to go to my Application(https://sergiogomez100000.github.io/Password-Generator/) and my Github Repository(https://github.com/sergiogomez100000/Password-Generator).
 
 ## Screenshot
 <img src="assets\images\Screenshot (10).png">
