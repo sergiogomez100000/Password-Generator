@@ -98,9 +98,21 @@ function getRandom(arr) {
 //function to copy generated password to clipboard
 function copyPassword(){
   password.select();
+  document.execCommand("Copy");
+  // alert("Copied to Clipboard!")
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.style.visibility= "visible";
+  tooltip.innerHTML = "Copied!";
 
+
+}
+
+function resetToolTip(){
+var tooltip = document.getElementById("myTooltip");
+tooltip.style.visibility = "hidden";  
 }
 
 // Add event listener to generate button and copy button
 generateBtn.addEventListener("click", writePassword);
 copyBtn.addEventListener("click", copyPassword)
+copyBtn.addEventListener("mouseout", resetToolTip)
