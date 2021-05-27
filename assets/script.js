@@ -1,6 +1,7 @@
 //Initialize global variables
 //setting up variable for the generate button in the document.
 var generateBtn = document.querySelector("#generate");
+var copyBtn= document.querySelector("#copy")
 // setting up data-type variables with arrays of data-types(uppercase, lowercase, numbers, special characters)
 var numbers = [0,1,2,3,4,5,6,7,8,9];
 // array of the data-type strings needs quotation marks split with commas
@@ -42,7 +43,7 @@ function generatePassword() {
     hasspecialCharacter === false &&
     hasupperCase === false &&
     haslowerCase === false){
-      alert("You must choose at least one character type");
+      alert("You must choose at least one character type!");
       return;
     }
 
@@ -76,14 +77,12 @@ function generatePassword() {
       // then push that into the result array
   for(var i=0; i<length; i++) {
     var randomChar = getRandom(possibleChars);
-    console.log("RANDOM CHARACTER: ", randomChar);
     // push each random character into the result -- Array.prototype.push()
     result.push(randomChar);
   }
-  console.log("RESULT: ", result);
   // convert the result array into a string, stored in a variable called password, and return it
   var password = result.join("");
-  return password
+  return password;
 }
 // helper function that returns a random element in an array
 function getRandom(arr) {
@@ -91,11 +90,17 @@ function getRandom(arr) {
   var randomIndex = Math.floor(Math.random()*arr.length);
   // select the item that is at the random index selected
   var randomEl = arr[randomIndex];
-
   // return the randomEl so we can use it outside this function
   return randomEl;
 
 }
 
-// Add event listener to generate button
+//function to copy generated password to clipboard
+function copyPassword(){
+  password.select();
+
+}
+
+// Add event listener to generate button and copy button
 generateBtn.addEventListener("click", writePassword);
+copyBtn.addEventListener("click", copyPassword)
