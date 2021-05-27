@@ -13,7 +13,7 @@ Users can use my application to create password safely. they generate a more sec
 You can use these links to go to my Application(https://github.com/sergiogomez100000) and my Github Repository(https://github.com/sergiogomez100000/Password-Generator).
 
 ## Screenshot
-<img src="assets\images\Screenshot (10).png">
+<img src="assets\images\Password-Generator.png">
 
 # Technologies Used
 - HTML
