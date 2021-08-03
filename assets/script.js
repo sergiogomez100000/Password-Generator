@@ -8,83 +8,14 @@ const tooltip = document.getElementById("myTooltip");
 const length = document.getElementById("length").value;
 // setting up data-type variables with arrays of data-types(uppercase, lowercase, numbers, special characters)
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const specialCharacters = [
-  "!",
-  "@",
-  "#",
-  "$",
-  "%",
-  "^",
-  "&",
-  "*",
-  "(",
-  ")",
-  "-",
-  "_",
-  "=",
-  "+",
-];
-const upperCase = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-const lowerCase = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-];
+const specialCharacters = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+",];
+const upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",];
+const lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",];
 
 // function to render password from generatePassword()
-function writePassword() {
+function writePassword(genPassword) {
   // store result of generatePassword() in variable
-  const password = generatePassword();
+  const password = genPassword;
   //set passwordtext value to password created
   passwordText.value = password;
 }
@@ -142,10 +73,24 @@ function generatePassword() {
     // push each random character into the result array
     result.push(randomChar);
   }
+  if(!result.some(hasNumbers)){
+    generatePassword()
+  }
+  if(!result.some(hasUpperCases)){
+    generatePassword();
+  }
+  if(!result.some(hasLowerCases)){
+    generatePassword();
+  }
+  if(!result.some(hasSpecialCharacters)){
+    generatePassword();
+  }
+  else{
   // convert the result array into a string, store as variable and return variable
   const password = result.join("");
-  //return password to use outside function
-  return password;
+  //writePassword() using password above as parameter
+  writePassword(password);
+  }
 }
 
 // helper function that returns a random element in an array
@@ -173,6 +118,6 @@ function resetToolTip() {
 }
 
 // Add event listeners to generate button and copy buttons
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", generatePassword);
 copyBtn.addEventListener("click", copyPassword);
 copyBtn.addEventListener("mouseout", resetToolTip);
