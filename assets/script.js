@@ -4,8 +4,6 @@ const generateBtn = document.querySelector("#generate");
 const copyBtn = document.querySelector("#copy");
 const passwordText = document.querySelector("#password");
 const tooltip = document.getElementById("myTooltip");
-//stores password length from length input as variable
-const length = document.getElementById("length").value;
 // setting up data-type variables with arrays of data-types(uppercase, lowercase, numbers, special characters)
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const specialCharacters = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+",];
@@ -22,6 +20,8 @@ function writePassword(genPassword) {
 
 // function to create password
 function generatePassword() {
+  //stores password length from length input as variable
+const length = document.getElementById("length").value;
   //if password length less than 8, more than 128 or Not A Number(NaN)
   if (length < 8 || length > 128 || isNaN(length) === true) {
     // then prompt alert and get out of function
@@ -66,31 +66,36 @@ function generatePassword() {
   if (hasLowerCases === true) {
     possibleChars = possibleChars.concat(lowerCase);
   }
-
+  console.log("length", length)
   // for the length given, choose a random character from the possibleCharacters
   for (var i = 0; i < length; i++) {
     const randomChar = getRandom(possibleChars);
     // push each random character into the result array
     result.push(randomChar);
   }
-  if(!result.some(hasNumbers)){
-    generatePassword()
-  }
-  if(!result.some(hasUpperCases)){
-    generatePassword();
-  }
-  if(!result.some(hasLowerCases)){
-    generatePassword();
-  }
-  if(!result.some(hasSpecialCharacters)){
-    generatePassword();
-  }
-  else{
+  console.log(result)
+  console.log(result.includes(3))
+
+  // function checkNumbers(result){
+  //   console.log("result includes", result.includes(numbers))
+  // }
+
+  // result.some(checkNumbers)
+  // if(!result.some(hasUpperCases)){
+  //   generatePassword();
+  // }
+  // if(!result.some(hasLowerCases)){
+  //   generatePassword();
+  // }
+  // if(!result.some(hasSpecialCharacters)){
+  //   generatePassword();
+  // }
+  // else{
   // convert the result array into a string, store as variable and return variable
   const password = result.join("");
   //writePassword() using password above as parameter
   writePassword(password);
-  }
+  // }
 }
 
 // helper function that returns a random element in an array
