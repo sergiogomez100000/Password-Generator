@@ -1,118 +1,178 @@
 //Initialize global variables
-//setting up variable for the generate button in the document.
-var generateBtn = document.querySelector("#generate");
-var copyBtn= document.querySelector("#copy")
+//setting up variables for document objects.
+const generateBtn = document.querySelector("#generate");
+const copyBtn = document.querySelector("#copy");
+const passwordText = document.querySelector("#password");
+const tooltip = document.getElementById("myTooltip");
+//stores password length from length input as variable
+const length = document.getElementById("length").value;
 // setting up data-type variables with arrays of data-types(uppercase, lowercase, numbers, special characters)
-var numbers = [0,1,2,3,4,5,6,7,8,9];
-// array of the data-type strings needs quotation marks split with commas
-var specialCharacters = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+"];
-var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  //go and retrieve html element with id of password
-  var passwordText = document.querySelector("#password");
-//change the text that is inside passwordText to password variable
-  passwordText.value = password;
+const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const specialCharacters = [
+  "!",
+  "@",
+  "#",
+  "$",
+  "%",
+  "^",
+  "&",
+  "*",
+  "(",
+  ")",
+  "-",
+  "_",
+  "=",
+  "+",
+];
+const upperCase = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+const lowerCase = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 
+// function to render password from generatePassword()
+function writePassword() {
+  // store result of generatePassword() in variable
+  const password = generatePassword();
+  //set passwordtext value to password created
+  passwordText.value = password;
 }
-// 1. we need a function named generatePassword();
+
+// function to create password
 function generatePassword() {
-  //stores password length from length Id as variable
-  var length = document.getElementById("length").value;
-  // the length has to be > 8 and <128
-    // if it's not, we need to start over
-      // otherwise, continue with the other prompts
-      //if password length less than 8, more than 128 or Not A Number(NaN)
-  if (length<8 || length>128 || isNaN(length) === true) {
-    // then do this if password  length not between 8 or 128.
+  //if password length less than 8, more than 128 or Not A Number(NaN)
+  if (length < 8 || length > 128 || isNaN(length) === true) {
+    // then prompt alert and get out of function
     alert("Password length must be between 8 and 128!");
     return;
-    //return to page if not between 8 or 128.
   }
-  // store user's responses as variables using a confirmation box
-  var hasNumbers = document.getElementById("num").checked;
-  var hasspecialCharacter = document.getElementById("special").checked;
-  var hasupperCase = document.getElementById("upper").checked;
-  var haslowerCase = document.getElementById("lower").checked;
+  // store user's parameters as variables using checkbox (true or false)
+  const hasNumbers = document.getElementById("num").checked;
+  const hasSpecialCharacters = document.getElementById("special").checked;
+  const hasUpperCases = document.getElementById("upper").checked;
+  const hasLowerCases = document.getElementById("lower").checked;
 
-  // check to make sure user selected at least one character type
-  // if no characters are selected then alert follows and returns
-  if (hasNumbers === false &&
-    hasspecialCharacter === false &&
-    hasupperCase === false &&
-    haslowerCase === false){
-      alert("You must choose at least one character type!");
-      return;
-    }
+  // if no checkboxes checked, prompt alert to check at least one and return
+  if (
+    hasNumbers === false &&
+    hasSpecialCharacters === false &&
+    hasUpperCases === false &&
+    hasLowerCases === false
+  ) {
+    alert("You must choose at least one character type!");
+    return;
+  }
 
-  //  creates variable to store all the possible choices, based on the user's input
-  var possibleChars = [];
-  // variable to store the final password as an array
-  var result = [];
-  // variable to store guaranteed characters, initialized as empty array
+  //  creates variable to store all the possible chars and result as arrays
+  let possibleChars = [];
+  let result = [];
 
-// if they asked for numbers the possiblecharacters will include numbers
-  if (hasNumbers===true){
-    // Array.prototype.concat() => merging / adding two arrays together
+  // if hasNumbers is true the possible chars will include numbers
+  if (hasNumbers === true) {
     // possible characters equals itself + numbers
     possibleChars = possibleChars.concat(numbers);
   }
-//if they asked for special characters, the possiblecharcters will include specialcharacters
-  if (hasspecialCharacter === true) {
+  // if hasSpecialChars is true, the possible chars will include special chars
+  if (hasSpecialCharacters === true) {
     possibleChars = possibleChars.concat(specialCharacters);
   }
-  //if they asked for upper case, the possible charcters will include upper case letters
-  if (hasupperCase === true) {
+  //if hasUpperCases is true, the possible chars will include uppercase letters
+  if (hasUpperCases === true) {
     possibleChars = possibleChars.concat(upperCase);
   }
-  //if they asked for lower case, the possible characters will include lower case letters
-  if(haslowerCase === true) {
+  //if hasLowerCases is true, the possible chars will include lowercase letters
+  if (hasLowerCases === true) {
     possibleChars = possibleChars.concat(lowerCase);
   }
 
-  // now that we have all the options, we have to figure out the password
-    // for the length that the user selected, choose a random character from the possibleCharacters
-      // then push that into the result array
-  for(var i=0; i<length; i++) {
-    var randomChar = getRandom(possibleChars);
-    // push each random character into the result -- Array.prototype.push()
+  // for the length given, choose a random character from the possibleCharacters
+  for (var i = 0; i < length; i++) {
+    const randomChar = getRandom(possibleChars);
+    // push each random character into the result array
     result.push(randomChar);
   }
-  // convert the result array into a string, stored in a variable called password, and return it
-  var password = result.join("");
+  // convert the result array into a string, store as variable and return variable
+  const password = result.join("");
+  //return password to use outside function
   return password;
 }
+
 // helper function that returns a random element in an array
 function getRandom(arr) {
-  // this returns a number value - a random number that is less than the length of the array
-  var randomIndex = Math.floor(Math.random()*arr.length);
-  // select the item that is at the random index selected
-  var randomEl = arr[randomIndex];
-  // return the randomEl so we can use it outside this function
+  // stores a random number val that is less than the length of array as variable
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  // select the item in arr that is at the random index selected as variable
+  const randomEl = arr[randomIndex];
+  // return the randomEl so we can use it outside function
   return randomEl;
-
 }
 
 //function to copy generated password to clipboard
-function copyPassword(){
+function copyPassword() {
+  //selects password, copies, shows tooltip showing "copied" message
   password.select();
   document.execCommand("Copy");
-  // alert("Copied to Clipboard!")
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.style.visibility= "visible";
+  tooltip.style.visibility = "visible";
   tooltip.innerHTML = "Copied!";
-
-
 }
 
-function resetToolTip(){
-var tooltip = document.getElementById("myTooltip");
-tooltip.style.visibility = "hidden";  
+// function to hide copy tooltip
+function resetToolTip() {
+  tooltip.style.visibility = "hidden";
 }
 
-// Add event listener to generate button and copy button
+// Add event listeners to generate button and copy buttons
 generateBtn.addEventListener("click", writePassword);
-copyBtn.addEventListener("click", copyPassword)
-copyBtn.addEventListener("mouseout", resetToolTip)
+copyBtn.addEventListener("click", copyPassword);
+copyBtn.addEventListener("mouseout", resetToolTip);
