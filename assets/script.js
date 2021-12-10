@@ -46,6 +46,10 @@ const length = document.getElementById("length").value;
   }
 
   //  creates variable to store all the possible chars and result as arrays
+  let possibleUpper = [];
+  let possibleLower = [];
+  let possibleNumb = [];
+  let possibleSpecial = [];
   let possibleChars = [];
   let result = [];
 
@@ -53,18 +57,38 @@ const length = document.getElementById("length").value;
   if (hasNumbers === true) {
     // possible characters equals itself + numbers
     possibleChars = possibleChars.concat(numbers);
+    // for (var i = 0; i < length; i++){
+    //const randomNums = getRandom(numbers);
+    //possibleNumb.push(randomNums);
+    //possibleChars.push(possibleNumb);
+    //}
   }
   // if hasSpecialChars is true, the possible chars will include special chars
   if (hasSpecialCharacters === true) {
     possibleChars = possibleChars.concat(specialCharacters);
+    //for (var i = 0; i < length; i++){
+    //const randomSpec = getRandom(specialCharacters);
+    //possibleSpec.push(randomSpec);
+    //possibleChars.push(possibleSpec);
+    //}
   }
   //if hasUpperCases is true, the possible chars will include uppercase letters
   if (hasUpperCases === true) {
     possibleChars = possibleChars.concat(upperCase);
+    //for (var i = 0; i < length; i++){
+    //const randomUpper = getRandom(upperCase);
+    //possibleUpper.push(randomUpper);
+    //possibleChars.push(possibleUpper);
+    //}
   }
   //if hasLowerCases is true, the possible chars will include lowercase letters
   if (hasLowerCases === true) {
     possibleChars = possibleChars.concat(lowerCase);
+    //for (var i = 0; i < length; i++){
+    //const randomLower = getRandom(lowerCase);
+    //possibleLower.push(randomLower);
+    //possibleChars.push(possibleLower);
+    //}
   }
   console.log("length", length)
   // for the length given, choose a random character from the possibleCharacters
