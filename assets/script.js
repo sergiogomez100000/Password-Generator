@@ -55,7 +55,7 @@ function generatePassword() {
     return;
   }
 
-  //if hasUpperCases is true, the possible chars will include uppercase letters
+  //if hasUpperCases is true, random upper added to possible chars for length given
   if (hasUpperCases === true) {
     for (var i = 0; i < length; i++){
     const randomUpper = getRandom(upperCase);
@@ -64,35 +64,34 @@ function generatePassword() {
     possibleChars = possibleChars.concat(possibleUpper)
   }
 
-  //if hasLowerCases is true, the possible chars will include lowercase letters
+  //if hasLowerCases is true, random lower added to possible chars for length given
   if (hasLowerCases === true) {
     for (var i = 0; i < length; i++){
     const randomLower = getRandom(lowerCase);
     possibleLower.push(randomLower);
     }
-    // possible characters equals itself + possibleLowers
     possibleChars = possibleChars.concat(possibleLower);
   }
 
-  // if hasNumbers is true the possible chars will include numbers
+  // if hasNumbers is true, random numb added to possible chars for length given
   if (hasNumbers === true) {
-  // for the length of password, get random number and add to possible chars
     for (var i = 0; i < length; i++){
     const randomNums = getRandom(numbers);
     possibleNumb.push(randomNums);
     }
     possibleChars = possibleChars.concat(possibleNumb);
   }
-  // if hasSpecialChars is true, the possible chars will include special chars
+
+  // if hasSpecialChars is true, random special added to possible chars for length given
   if (hasSpecialCharacters === true) {
-    // possibleChars = possibleChars.concat(specialCharacters);
     for (var i = 0; i < length; i++){
     const randomSpecial = getRandom(specialCharacters);
     possibleSpecial.push(randomSpecial);
     }
     possibleChars = possibleChars.concat(possibleSpecial);
   }
-  // for the length given, choose a random character from the possibleCharacters
+
+  // for the length given, choose a random character from possibleChars add to result
   for (var i = 0; i < length; i++) {
     // console.log(possibleChars);
     const randomChar = getRandom(possibleChars);
@@ -101,7 +100,7 @@ function generatePassword() {
   }
   console.log(result)
 
-  // convert the result array into a string, store as variable and return variable
+  // convert the result array into a string, store as variable to use as parameter
   const password = result.join("");
   //writePassword() using password above as parameter
   writePassword(password);
@@ -111,9 +110,8 @@ function generatePassword() {
 function getRandom(arr) {
   // stores a random number val that is less than the length of array as variable
   const randomIndex = Math.floor(Math.random() * arr.length);
-  // select the item in arr that is at the random index selected as variable
+  // select the item in arr that is at the random index selected as variable, return to use outside function
   const randomEl = arr[randomIndex];
-  // return the randomEl so we can use it outside function
   return randomEl;
 }
 
