@@ -20,31 +20,6 @@ function writePassword(genPassword) {
 
 // function to create password
 function generatePassword() {
-  //stores password length from length input as variable
-const length = document.getElementById("length").value;
-  //if password length less than 8, more than 128 or Not A Number(NaN)
-  if (length < 8 || length > 128 || isNaN(length) === true) {
-    // then prompt alert and get out of function
-    alert("Password length must be between 8 and 128!");
-    return;
-  }
-  // store user's parameters as variables using checkbox (true or false)
-  const hasNumbers = document.getElementById("num").checked;
-  const hasSpecialCharacters = document.getElementById("special").checked;
-  const hasUpperCases = document.getElementById("upper").checked;
-  const hasLowerCases = document.getElementById("lower").checked;
-
-  // if no checkboxes checked, prompt alert to check at least one and return
-  if (
-    hasNumbers === false &&
-    hasSpecialCharacters === false &&
-    hasUpperCases === false &&
-    hasLowerCases === false
-  ) {
-    alert("You must choose at least one character type!");
-    return;
-  }
-
   //  creates variable to store all the possible chars and result as arrays
   let possibleUpper = [];
   let possibleLower = [];
@@ -53,73 +28,83 @@ const length = document.getElementById("length").value;
   let possibleChars = [];
   let result = [];
 
+  // store user's parameters as variables using checkbox (true or false)
+  const hasNumbers = document.getElementById("num").checked;
+  const hasSpecialCharacters = document.getElementById("special").checked;
+  const hasUpperCases = document.getElementById("upper").checked;
+  const hasLowerCases = document.getElementById("lower").checked;
+
+  //stores password length from length input as variable
+  const length = document.getElementById("length").value;
+
+  //if password length less than 8, more than 128 or Not A Number(NaN)
+  if (length < 8 || length > 128 || isNaN(length) === true) {
+    // then prompt alert and get out of function
+    alert("Password length must be between 8 and 128!");
+    return;
+  }
+
+  // if no checkboxes checked, prompt alert to check at least one and return
+  if (
+    hasUpperCases === false &&
+    hasLowerCases === false && 
+    hasNumbers === false &&
+    hasSpecialCharacters === false
+  ) {
+    alert("You must choose at least one character type!");
+    return;
+  }
+
+  //if hasUpperCases is true, the possible chars will include uppercase letters
+  if (hasUpperCases === true) {
+    for (var i = 0; i < length; i++){
+    const randomUpper = getRandom(upperCase);
+    possibleUpper.push(randomUpper);
+    }
+    possibleChars = possibleChars.concat(possibleUpper)
+  }
+
+  //if hasLowerCases is true, the possible chars will include lowercase letters
+  if (hasLowerCases === true) {
+    for (var i = 0; i < length; i++){
+    const randomLower = getRandom(lowerCase);
+    possibleLower.push(randomLower);
+    }
+    // possible characters equals itself + possibleLowers
+    possibleChars = possibleChars.concat(possibleLower);
+  }
+
   // if hasNumbers is true the possible chars will include numbers
   if (hasNumbers === true) {
-    // possible characters equals itself + numbers
-    possibleChars = possibleChars.concat(numbers);
-    // for (var i = 0; i < length; i++){
-    //const randomNums = getRandom(numbers);
-    //possibleNumb.push(randomNums);
-    //possibleChars.push(possibleNumb);
-    //}
+  // for the length of password, get random number and add to possible chars
+    for (var i = 0; i < length; i++){
+    const randomNums = getRandom(numbers);
+    possibleNumb.push(randomNums);
+    }
+    possibleChars = possibleChars.concat(possibleNumb);
   }
   // if hasSpecialChars is true, the possible chars will include special chars
   if (hasSpecialCharacters === true) {
-    possibleChars = possibleChars.concat(specialCharacters);
-    //for (var i = 0; i < length; i++){
-    //const randomSpec = getRandom(specialCharacters);
-    //possibleSpec.push(randomSpec);
-    //possibleChars.push(possibleSpec);
-    //}
+    // possibleChars = possibleChars.concat(specialCharacters);
+    for (var i = 0; i < length; i++){
+    const randomSpecial = getRandom(specialCharacters);
+    possibleSpecial.push(randomSpecial);
+    }
+    possibleChars = possibleChars.concat(possibleSpecial);
   }
-  //if hasUpperCases is true, the possible chars will include uppercase letters
-  if (hasUpperCases === true) {
-    possibleChars = possibleChars.concat(upperCase);
-    //for (var i = 0; i < length; i++){
-    //const randomUpper = getRandom(upperCase);
-    //possibleUpper.push(randomUpper);
-    //possibleChars.push(possibleUpper);
-    //}
-  }
-  //if hasLowerCases is true, the possible chars will include lowercase letters
-  if (hasLowerCases === true) {
-    possibleChars = possibleChars.concat(lowerCase);
-    //for (var i = 0; i < length; i++){
-    //const randomLower = getRandom(lowerCase);
-    //possibleLower.push(randomLower);
-    //possibleChars.push(possibleLower);
-    //}
-  }
-  console.log("length", length)
   // for the length given, choose a random character from the possibleCharacters
   for (var i = 0; i < length; i++) {
+    // console.log(possibleChars);
     const randomChar = getRandom(possibleChars);
     // push each random character into the result array
     result.push(randomChar);
   }
   console.log(result)
-  console.log(result.includes(3))
 
-  // function checkNumbers(result){
-  //   console.log("result includes", result.includes(numbers))
-  // }
-
-  // result.some(checkNumbers)
-  // if(!result.some(hasUpperCases)){
-  //   generatePassword();
-  // }
-  // if(!result.some(hasLowerCases)){
-  //   generatePassword();
-  // }
-  // if(!result.some(hasSpecialCharacters)){
-  //   generatePassword();
-  // }
-  // else{
   // convert the result array into a string, store as variable and return variable
   const password = result.join("");
   //writePassword() using password above as parameter
   writePassword(password);
-  // }
 }
 
 // helper function that returns a random element in an array
